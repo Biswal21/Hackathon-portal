@@ -1,0 +1,8 @@
+*.sqlite3
+__pycache__
+migrations/
+.venv/
+
+
+static/*
+!static/jazzmin_dark
