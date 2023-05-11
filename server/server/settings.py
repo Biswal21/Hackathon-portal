@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework_simplejwt.token_blacklist",
     "drf_spectacular",
-    # "wiki_project",
+    "hackathon",
 ]
 
 MIDDLEWARE = [
@@ -206,6 +206,7 @@ SPECTACULAR_SETTINGS = {
     "TITLE": os.environ.get("PROJECT_NAME", "Server API"),
     "DESCRIPTION": "All API endpoints for the Server API",
     "VERSION": os.environ.get("PROJECT_VERSION", "1.0.0"),
+    "COMPONENT_SPLIT_REQUEST": True,
 }
 
 # JAZZMIN SETTINGS

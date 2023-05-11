@@ -9,6 +9,3 @@ whitenoise==6.4.0
 black==23.1.0
 flake8==6.0.0
 djangorestframework-simplejwt==5.2.2
-wikipedia-api==0.5.8
-pysbd==0.3.4
-django-filter==22.1
