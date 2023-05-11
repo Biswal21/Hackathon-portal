@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = bool(os.environ.get("DJANGO_DEBUG", default=True))
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["http://localhost", "https://wiki-annot.fly.dev"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost", "https://hack-port.fly.dev"]
 
 
 # Application definition
@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
-    "django_filters",
     "rest_framework_simplejwt.token_blacklist",
     "drf_spectacular",
     "hackathon",

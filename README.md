@@ -53,10 +53,10 @@ docker-compose up
 
 4. Visit API documentation at
    - Development `localhost:8000/docs`
-   - Production: [production docs](https://wiki-annot.fly.dev/docs/)
+   - Production: [production docs](https://hack-port.fly.dev/docs/)
 5. Visit Server Admin
    - Development: `localhost:8000/admin/`
-   - Production: `[production admin](https://wiki-annot.fly.dev/admin/) 
+   - Production: `[production admin](https://hack-port.fly.dev/admin/) 
 
 ## Note
 

@@ -1,22 +1,26 @@
-#---- Base python ----
-FROM python:3.9-slim-bullseye as base
+ARG PYTHON_VERSION=3.10-slim-buster
 
-ENV PYTHONUNBUFFERED 1
+FROM python:${PYTHON_VERSION}
+
 ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Create app directory
-WORKDIR /src
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt 
+RUN mkdir -p /code
 
-# ---- Copy Files/Build ----
-FROM base
+WORKDIR /code
 
-WORKDIR /src
+COPY requirements.txt /tmp/requirements.txt
 
-COPY . /src
+RUN set -ex && \
+    pip install --upgrade pip && \
+    pip install -r /tmp/requirements.txt && \
+    rm -rf /root/.cache/
+
+COPY . /code/
+
+RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-RUN chown -R $USER:$USER .
-RUN chmod -R 777 /src
+# replace demo.wsgi with <project_name>.wsgi
+CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "server.wsgi"]

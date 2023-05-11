@@ -6,3 +6,4 @@ migrations/
 
 static/*
 !static/jazzmin_dark
+.env.dev
