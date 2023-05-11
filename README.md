@@ -1,30 +1,26 @@
-# Wikipedia Annotator Platform
+# Hackathon Platform
 
-Platform for helping people make datasets for NLP translation by using Wikipedia article summaries from it's API.
+Platform for organisers and participants to host and participate in hackathons.
 
 ## Features
 
 - Buillt a REST API using Django REST Framework.
 - Swagger implemented OpenAPI3 for API documentation.
 - Containerized application(services) using Docker.
-- Implement frontend using ReactJS with ChakraUI.
-- Created djnago permission groups of Manager and Annoator
-- Only Manager can create Projects and import summary from WikipediaAPI.
-- Add Languages on the fly which are supported by React transliterate.
-- Assign annotator to project.
-- User can only see projects assigned to them or created by them.
-- Onl yManagers can perform project status change.
-- Update and save sentence translations.
-- Ability to create multiple projects.
-- Implemented React-Transliterate.
-- Intuitive UI for user to understand Topic of project and language to be annotated.
+- Created djnago permission groups of Organisers and Participants.
+- Only Organiser can create a hackathon.
+- Organiser can view all the projects submitted for a hackathon.
+- Organiser can view all the participants registered for a hackathon.
+- Hackathon can specify the type of submit( file, image or link)
+- Particapants can register for a hackathon.
+- Particiapnts can submit their projects for a hackathon.
+- Particapants can view all the hackathons they have registered for.
+- Particapants can view all submissions of hackathons they have registered for.
 
 ## Built With
 
 - [Django REST Framework](https://www.django-rest-framework.org)
 - [PotgreSQL as RDS](https://www.postgresql.org)
-- [ReactJS in Typescript](https://reactjs.org)
-- [ChakraUI](https://chakra-ui.com)
 
 ## Prerequisites
 
@@ -36,8 +32,8 @@ Platform for helping people make datasets for NLP translation by using Wikipedia
 1. Clone this repository and change directory.
 
 ```bash
-git https://github.com/Biswal21/WikiAnnotator.git
-cd WikiAnnotator
+git https://github.com/Biswal21/Hackathon-portal.git
+cd Hackathon-portal
 ```
 
 2. Run the following command to **build** and **run** all the containers for the first time.
@@ -52,17 +48,13 @@ docker-compose up --build
 docker-compose up
 ```
 
-## Deployed server and fronted
+## 
 
-5. Visit django-admin at
-   development: `localhost:8000/admin/` production: `https://wiki-annot.fly.dev/admin/`
-6. Visit frontend at
-   - Developement: `localhost:3000` 
-   - Production: [production](https://main--gentle-caramel-659bd7.netlify.app/)
-7. Visit API documentation at
+
+4. Visit API documentation at
    - Development `localhost:8000/docs`
    - Production: [production docs](https://wiki-annot.fly.dev/docs/)
-8. Visit Server Admin
+5. Visit Server Admin
    - Development: `localhost:8000/admin/`
    - Production: `[production admin](https://wiki-annot.fly.dev/admin/) 
 
@@ -73,5 +65,5 @@ docker-compose up
 ### Note for Production Credentials
 
 - Check `admin` credentials in **google form response** last question's answer.
-- Check `annotator` credentials in **google form response** last question's answer.
-- Check `manager` credentials in **google form response** last question's answer.
+- Check `organiser` credentials in **google form response** last question's answer.
+- Check `participant` credentials in **google form response** last question's answer.
