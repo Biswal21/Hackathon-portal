@@ -22,13 +22,15 @@ Platform for organisers and participants to host and participate in hackathons.
 - [Django REST Framework](https://www.django-rest-framework.org)
 - [PotgreSQL as RDS](https://www.postgresql.org)
 
+## Database Design
+![Database schema](https://raw.githubusercontent.com/Biswal21/Hackathon-portal/main/readme-asset/Hackathon%20Portal.png)
+
 ## Prerequisites
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [docker-compose](https://docs.docker.com/compose/install/)
 
 ## Installation and Usage
-
 1. Clone this repository and change directory.
 
 ```bash
