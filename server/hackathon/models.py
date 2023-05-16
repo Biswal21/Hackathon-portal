@@ -40,7 +40,7 @@ class Registration(models.Model):
         primary_key=True, default=uuid.uuid4, editable=False
     )
     fk_user = models.ForeignKey(
-        User, related_name="Participant", on_delete=models.CASCADE
+        User, related_name="participant", on_delete=models.CASCADE
     )
     fk_hackathon = models.ForeignKey(HackathonPost, on_delete=models.CASCADE)
     is_submitted = models.BooleanField(default=False)

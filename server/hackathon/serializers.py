@@ -1,5 +1,15 @@
 from rest_framework import serializers
 from .models import HackathonPost, Submission, Registration
+from django.contrib.auth.models import User
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "username", "email", "first_name", "last_name"]
+
+    def validate(self, attrs):
+        return super().validate(attrs)
 
 
 class HackathonPostSerializer(serializers.ModelSerializer):

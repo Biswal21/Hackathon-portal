@@ -1,4 +1,4 @@
-# from django.db.models import Q
+from django.db.models import Q
 from django.utils import timezone
 from .serializers import (
     HackathonPostSerializer,
@@ -7,9 +7,11 @@ from .serializers import (
     SubmissionSerializers,
     SubmissionDataSerializers,
     DeleteSerializer,
+    UserSerializer,
 )
 
 from .models import HackathonPost, Registration, Submission, GROUP_ROLE
+from django.contrib.auth.models import User
 
 # from .utils import MultipartJsonParser
 from rest_framework.parsers import JSONParser, MultiPartParser
@@ -280,6 +282,90 @@ class RegistrationViewSet(viewsets.ViewSet):
         except Exception:
             return Response(
                 {"detail": "Serializer Error"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        return Response(data=serialized.data, status=status.HTTP_200_OK)
+
+    @extend_schema(
+        # parameters=[OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)],
+        responses={200: UserSerializer(many=True)},
+    )
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="registered/read",
+        permission_classes=[],
+    )
+    def get_all_registered(self, request):
+        if request.user.is_authenticated:
+            if request.user.groups.filter(name=GROUP_ROLE[0]).exists():
+                queryset = User.objects.filter(
+                    Q(participant__isnull=False) & Q(groups__name=GROUP_ROLE[1])
+                ).distinct()
+
+                # .order_by(
+            # "created_at"
+            # )
+            else:
+                return Response(
+                    data={"message": "Unauthorized"},
+                    status=status.HTTP_401_UNAUTHORIZED,
+                )
+
+        else:
+            return Response(
+                data={"message": "You are not authenticated"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+        print(queryset)
+        try:
+            serialized = UserSerializer(instance=queryset, many=True)
+        except Exception:
+            return Response(
+                {"message": "Serializer Error"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        return Response(data=serialized.data, status=status.HTTP_200_OK)
+
+    @extend_schema(
+        # parameters=[OpenApiParameter("id", OpenApiTypes.INT, OpenApiParameter.PATH)],
+        responses={200: UserSerializer(many=True)},
+    )
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="unregistered/read",
+        permission_classes=[],
+    )
+    def get_all_unregistered(self, request):
+        if request.user.is_authenticated:
+            if request.user.groups.filter(name=GROUP_ROLE[0]).exists():
+                queryset = (
+                    User.objects.exclude(participant__isnull=False)
+                    .filter(groups__name=GROUP_ROLE[1])
+                    .distinct()
+                )
+
+                # .order_by(
+            # "created_at"
+            # )
+            else:
+                return Response(
+                    data={"message": "Unauthorized"},
+                    status=status.HTTP_401_UNAUTHORIZED,
+                )
+
+        else:
+            return Response(
+                data={"message": "You are not authenticated"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+        print(queryset)
+        try:
+            serialized = UserSerializer(instance=queryset, many=True)
+        except Exception:
+            return Response(
+                {"message": "Serializer Error"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
         return Response(data=serialized.data, status=status.HTTP_200_OK)
